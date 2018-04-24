@@ -43,6 +43,14 @@ while escolha > 0:
         else:
             print('Nao se encontra no estoque')
             break
+
+    if escolha == 3:
+         nome_produto = input('Digite o Produto: ')
+         if nome_produto in estoque:
+            quantidade+= int(input('Digite a quantidade do produto adicionada/removida: '))
+         else:
+            print("Esse produto não está no estoque")
+         estoque[nome_produto] = quantidade
     
     if escolha == 4:
         print(estoque)
