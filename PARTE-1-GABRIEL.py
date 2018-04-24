@@ -27,11 +27,11 @@ while escolha > 0:
         nome_produto = input('Digite o Produto: ')
         if nome_produto in estoque:
             print('Esse produto já está no estoque')
-            break
+            
         quantidade = int(input('Digite a quantidade do produto: '))
         if quantidade < 0:
             print('A quantidade inicial não pode ser negativa')
-            break    
+               
         preco = int(input('Digite o preço do produto: '))
     estoque[nome_produto] = {}
     estoque[nome_produto]['Quantidade'] = quantidade
@@ -43,7 +43,7 @@ while escolha > 0:
             del estoque[nome_produto]
         else:
             print('Nao se encontra no estoque')
-            break
+            
 
     if escolha == 3:
          nome_produto = input('Digite o Produto: ')
