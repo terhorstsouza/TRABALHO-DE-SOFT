@@ -1,3 +1,12 @@
+import json
+
+
+with open ('Arquivo.txt','r') as arquivo:
+    conteudo = arquivo.read()
+    estoque = json.loads(conteudo)
+
+
+
 print("Controle de Estoque")
 print("0 - sair",
       "1 - adicionar item",
@@ -52,3 +61,7 @@ if escolha == 0:
    
     print("até mais!")
 
+
+with open ('Arquivo.txt','w') as arquivo:
+    conteudo = json.dumps(estoque, sort_keys=True, indent=4)
+    arquivo.write(conteudo)
