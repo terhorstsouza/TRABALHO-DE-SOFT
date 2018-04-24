@@ -22,6 +22,16 @@ while escolha > 0:
             print('A quantidade inicial não pode ser negativa')
             quantidade = int(input('Digite a quantidade do produto: '))
     estoque[nome_produto] = quantidade
+	
+
+    if escolha == 2:
+        nome_produto = input('Digite o Produto: ')
+        if nome_produto in estoque:
+            del estoque[nome_produto]
+        else:
+            print('Nao se encontra no estoque')
+            break
+
     
     print("Controle de Estoque")
     print("0 - sair",
