@@ -1,3 +1,5 @@
+negativos = []
+valores = 0
 import json
 
 
@@ -60,6 +62,20 @@ while escolha > 0:
 if escolha == 0:
    
     print("até mais!")
+
+
+    for coisas in estoque:
+        valor = (estoque[coisas]['preco']) * (estoque[coisas]['Quantidade'])
+        valores += valor
+    print('O valor total em estoque é: {0} Reais'.format(valores))
+
+
+    
+    for produtos in estoque:
+        if (estoque[produtos]['Quantidade']) < 0:
+            negativos.append(produtos)
+    print('Os seguintes produtos possuem estoques negativos: ')
+    print(negativos)
 
 
 with open ('Arquivo.txt','w') as arquivo:
