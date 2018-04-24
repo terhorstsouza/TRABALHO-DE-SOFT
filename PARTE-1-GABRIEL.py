@@ -14,7 +14,8 @@ print("0 - sair",
       "1 - adicionar item",
       "2 - remover item",
       "3 - alterar item",
-      "4 - imprimir estoque")
+      "4 - imprimir estoque",
+      "5 - Alterar preço")
 
 escolha = int(input("Faça sua escolha: "))
 estoque = {}
@@ -55,13 +56,19 @@ while escolha > 0:
     if escolha == 4:
         print(estoque)
     
+    if escolha == 5:
+        nome_produto = int(input('Digite um produto: '))
+        novo_preco = int(input('Digite o novo preco: '))
+        estoque[nome_produto]['preco'] = novo_preco
     
+
     print("Controle de Estoque")
     print("0 - sair",
       "1 - adicionar item",
       "2 - remover item",
       "3 - alterar item",
-      "4 - imprimir estoque")
+      "4 - imprimir estoque",
+      "5 - Alterar preço")
 
     escolha = int(input("Faça sua escolha: "))
     
