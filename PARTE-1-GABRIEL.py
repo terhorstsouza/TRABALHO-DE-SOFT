@@ -19,9 +19,10 @@ escolha2 = input('Digite sua escolha:  ')
 if escolha2 == 'A':
     
     Nome = input('Digite sua loja: ')
-    while Nome in estoque:
-        print('Já está Cadastrada')
-        Nome = input('Digite sua loja: ')
+    if Nome in estoque:
+       print('Já está Cadastrada')
+       while Nome in estoque:       
+            Nome = input('Digite sua loja: ')
         
 if escolha2 == 'B':
     
