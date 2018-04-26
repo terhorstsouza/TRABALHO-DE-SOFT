@@ -41,6 +41,8 @@ if escolha2 == 'C':
         print('Essa loja não existe')
         while Nome not in estoque:
            Nome = input('Digite sua loja: ')
+    else:
+        del estoque[Nome]
 
 print("Controle de Estoque")
 print("0 - sair",
