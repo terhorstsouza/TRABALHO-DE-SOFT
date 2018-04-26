@@ -1,13 +1,13 @@
 negativos = []
 valores = 0
-import json
+from firebase import firebase
 
 
 
-with open ('Arquivo.txt','r') as arquivo:
-    conteudo = arquivo.read()
-    estoque = json.loads(conteudo)
-
+database = firebase.FirebaseApplication("https://ep-d-soft.firebaseio.com/",None)
+estoque = database.get("/estoque/lojas", None)
+if estoque == None:
+    estoque = {}
 
 print('O que deseja fazer?')
 print('A - Adicionar loja')
@@ -20,9 +20,8 @@ if escolha2 == 'A':
     
     Nome = input('Digite sua loja: ')
     if Nome in estoque:
-       print('Já está Cadastrada')
-       while Nome in estoque:       
-            Nome = input('Digite sua loja: ')
+       print('Já está Cadastrada')      
+       Nome = input('Digite sua loja: ')
         
 if escolha2 == 'B':
     
@@ -31,7 +30,7 @@ if escolha2 == 'B':
         print(estoque[Nome])
 
     else:
-        print('Essa loja não existe')
+        print('Não está cadastrada')
 	while Nome not in estoque:    
             Nome = input('Digite sua loja: ')
 
@@ -44,14 +43,16 @@ if escolha2 == 'C':
            Nome = input('Digite sua loja: ')
     else:
         del estoque[Nome]
+if Nome not in estoque:
+    estoque[Nome] = {}    
 
 print("Controle de Estoque")
-print("0 - sair",
-      "1 - adicionar item",
-      "2 - remover item",
-      "3 - alterar item",
-      "4 - imprimir estoque",
-      "5 - Alterar preço")
+print("0 - sair")
+print("1 - adicionar item")
+print("2 - remover item")
+print("3 - alterar item")
+print("4 - imprimir estoque")
+print("5 - Alterar preço")
 
 escolha = int(input("Faça sua escolha: "))
 
@@ -70,7 +71,7 @@ while escolha > 0:
             break 
         preco = float(input('Digite o preço do produto: '))
 	if preco < 0:
-	    print('A quantidade inicial não pode ser negativa')
+	    print('O preço não pode ser negativo')
 	    break
         estoque[Nome][nome_produto] = {}
         estoque[Nome][nome_produto]['Quantidade'] = quantidade
@@ -81,7 +82,7 @@ while escolha > 0:
         if nome_produto in estoque[Nome]:
             del estoque[Nome][nome_produto]
         else:
-            print('Nao se encontra no estoque')
+            print('Não se encontra no estoque')
             
 
     if escolha == 3:
@@ -90,7 +91,7 @@ while escolha > 0:
             nova_quantidade+= (int(input('Digite a quantidade do produto adicionada/removida: ')))
             estoque[Nome][nome_produto]['Quantidade'] += nova_quantidade 
 	 else:
-            print("Esse produto não está no estoque")
+            print("Elemento não encontrado")
 	    
          
     
@@ -105,11 +106,11 @@ while escolha > 0:
 
     print("Controle de Estoque")
     print("0 - sair",
-      "1 - adicionar item",
-      "2 - remover item",
-      "3 - alterar item",
-      "4 - imprimir estoque",
-      "5 - Alterar preço")
+    print("1 - adicionar item")
+    print("2 - remover item")
+    print("3 - alterar item")
+    print("4 - imprimir estoque")
+    print("5 - Alterar preço")
 
     escolha = int(input("Faça sua escolha: "))
     
@@ -118,9 +119,11 @@ while escolha > 0:
 if escolha == 0:
    
     print("até mais!")
+    novo_estoque = database.patch("/estoque/lojas/", estoque)
 
 for coisas in estoque[Nome]:
-    valor = (int(estoque[Nome][coisas]['Quantidade']))*(int(estoque[Nome][coisas]['preco']))
+
+    valor = (int(estoque[Nome][coisas]['Quantidade']))*(float(estoque[Nome][coisas]['preco']))
     valores += valor
 print('O valor total em estoque é: {0} Reais'.format(valores))
 
@@ -134,6 +137,3 @@ print(negativos)
 
 
 
-with open ('Arquivo.txt','w') as arquivo:
-    conteudo = json.dumps(estoque, sort_keys=True, indent=4)
-    arquivo.write(conteudo)
